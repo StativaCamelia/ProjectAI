@@ -1,0 +1,8 @@
+"text":"vreau un site despre Donald Trump"
+"text":"vreau o definitie despre biblioteca"
+"text":"care este vremea in Los Angeles"
+"text":"vreau o harta cu Romania"
+"text":"unde se afla Los Angeles?"
+"text":"care este adresa pentru biblioteca"
+"text":"vreau un film cu Chuck Norris"
+"text":"vreau un scurtmetraj cu Chuck Norris"
