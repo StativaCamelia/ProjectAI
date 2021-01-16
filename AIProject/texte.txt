@@ -7,3 +7,6 @@
 "text":"vreau un film cu Chuck Norris"
 "text":"vreau un scurtmetraj cu Chuck Norris"
 "text": "actiunile la Google si cum sunt actiunile la Facebook"
+"text":"informatii despre cincisprezece ianuarie"
+"text":"date legate de 25 decembrie"
+"text":"date legate de 2 ian"

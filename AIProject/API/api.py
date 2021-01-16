@@ -77,6 +77,7 @@ def create_task():
             query_all += ' OR '
             continue
         response_entities = sample_analyze_entities(text_en)
+        print(response_entities)
         query = ''
         entities_types = []
         entity_dict = {
@@ -94,7 +95,7 @@ def create_task():
                     # in special pentru location; daca exista o singura entitate, care are tipul location..atunci operatorul este location (gasit in operatori) iar valoarea este entity.name:
                     if len(response_entities) == 1:
                         entity_dict['operator_value'] = entity.name
-                else:
+                elif entity_dict.get('operator_value') == '':
                     entity_dict['operator_value'] = entity.name
         entities_types.append(entity_dict)
         for entity_type in entities_types:
