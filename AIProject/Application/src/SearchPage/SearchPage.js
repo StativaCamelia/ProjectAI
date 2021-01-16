@@ -46,7 +46,7 @@ class Search extends  React.Component {
                          </form>
                     </div>
                     <div className="response_container">
-                         <input className="input_container" type="text" value={this.state.response}/>
+                         <input className="input_container" type="text" value={this.state.response} onChange={e=>this.setState({response: e.target.value})}/>
                     </div>
                 </div>
                 <Particles className="particles_js"

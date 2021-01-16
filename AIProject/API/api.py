@@ -5,6 +5,7 @@ from flask_cors import CORS, cross_origin
 import os
 import flask
 import requests
+import re
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.abspath("ProiectTw-12bf250f4662.json")
 
 
@@ -64,32 +65,42 @@ get_similarities_for_operators()
 def create_task():
     text_ro = request.json["text"]
     translation = translator.translate(text_ro, dest='en')
-    text_en = translation.text
-    response_entities = sample_analyze_entities(text_en)
-    print(response_entities)
-    query = ''
-    entities_types = []
-    entity_dict = {
-        'operator': '',
-        'operator_value': ''
-    }
-    for entity in response_entities:
-        entity_operator_name = get_similarity_for_word(str(entity.name).lower())
-        entity_operator_type = get_similarity_for_word(str(entity.type_)[5:].lower())
-        if entity_operator_name and entity_dict.get('operator') == '':
-            entity_dict['operator'] = entity_operator_name
-        else:
-            if entity_operator_type and entity_dict.get('operator') == '':
-                entity_dict['operator'] = entity_operator_type
-                # in special pentru location; daca exista o singura entitate, care are tipul location..atunci operatorul este location (gasit in operatori) iar valoarea este entity.name:
-                if len(response_entities) == 1:
-                    entity_dict['operator_value'] = entity.name
+    text_en_all = translation.text
+    text_en_all = re.split(r'(\sand\s|\sor\s)', text_en_all)
+    print(text_en_all)
+    query_all = ""
+    for text_en in text_en_all:
+        if text_en.lower() == ' and ':
+            query_all += ' AND '
+            continue
+        if text_en.lower() == ' or ':
+            query_all += ' OR '
+            continue
+        response_entities = sample_analyze_entities(text_en)
+        query = ''
+        entities_types = []
+        entity_dict = {
+            'operator': '',
+            'operator_value': ''
+        }
+        for entity in response_entities:
+            entity_operator_name = get_similarity_for_word(str(entity.name).lower())
+            entity_operator_type = get_similarity_for_word(str(entity.type_)[5:].lower())
+            if entity_operator_name and entity_dict.get('operator') == '':
+                entity_dict['operator'] = entity_operator_name
             else:
-                entity_dict['operator_value'] = entity.name
-    entities_types.append(entity_dict)
-    for entity_type in entities_types:
-        query = entity_type['operator'] + ':' + entity_type['operator_value']
-    response = jsonify({'response': query})
+                if entity_operator_type and entity_dict.get('operator') == '':
+                    entity_dict['operator'] = entity_operator_type
+                    # in special pentru location; daca exista o singura entitate, care are tipul location..atunci operatorul este location (gasit in operatori) iar valoarea este entity.name:
+                    if len(response_entities) == 1:
+                        entity_dict['operator_value'] = entity.name
+                else:
+                    entity_dict['operator_value'] = entity.name
+        entities_types.append(entity_dict)
+        for entity_type in entities_types:
+            query = entity_type['operator'] + ':' + entity_type['operator_value']
+        query_all += query
+    response = jsonify({'response': query_all})
     response.headers.add("Access-Control-Allow-Origin", "*")
     return response
 
