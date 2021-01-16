@@ -1,6 +1,7 @@
-from flask import request, jsonify
+from flask import request, jsonify, make_response
 from google.cloud import language_v1
 from googletrans import Translator
+from flask_cors import CORS, cross_origin
 import os
 import flask
 import requests
@@ -55,6 +56,7 @@ def get_similarity_for_word(word):
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
+CORS(app)
 get_similarities_for_operators()
 
 
@@ -87,7 +89,19 @@ def create_task():
     entities_types.append(entity_dict)
     for entity_type in entities_types:
         query = entity_type['operator'] + ':' + entity_type['operator_value']
-    return jsonify({'response': query})
+    response = jsonify({'response': query})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
+@app.route("/", methods=["OPTIONS"])
+def api_create_order():
+    return build_cors_prelight_response()
+
+def build_cors_prelight_response():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add('Access-Control-Allow-Headers', "*")
+    response.headers.add('Access-Control-Allow-Methods', "*")
+    return response
 
 app.run()
