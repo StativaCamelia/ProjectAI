@@ -15,9 +15,13 @@
     Zănceanu Ana-Maria
 
   # Mod de funcționare:
-    Din pagina principală, apăsând butonul de Start now, se ajunge în pagina de search. În primul input se va introduce întrebarea, iar în al doilea se primește query-ul primit ca răspuns. Acesta se poate modifica și copia pentru a fi introdus în motorul de căutare Google.
+    Din pagina principală, apăsând butonul de Start now, se ajunge în pagina de search. 
     
-    Ce se petrece în spate:
+    În primul input se va introduce întrebarea, iar în al doilea se primește query-ul primit ca răspuns. 
+    
+    Acesta se poate modifica și copia pentru a fi introdus în motorul de căutare Google.
+    
+  ## Ce se petrece în spate:
     
     -întrebarea primită este tradusă în limba engleză
     
