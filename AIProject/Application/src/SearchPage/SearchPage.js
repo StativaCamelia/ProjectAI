@@ -49,41 +49,6 @@ class Search extends  React.Component {
                          <input className="input_container" type="text" value={this.state.response} onChange={e=>this.setState({response: e.target.value})}/>
                     </div>
                 </div>
-                <Particles className="particles_js"
-                params={{
-                    particles: {
-                        number: {
-                            value: 150,
-                            density: {
-                                value_area: 10000
-                            }
-                        },
-                        color: {
-                            value: '#fff'
-                        },
-                        opacity: {
-                            value: 0.8,
-                            anim: {
-                                enable: true
-                            }
-                        },
-                        size: {
-                            value: 7,
-                            random: true,
-                            anim: {
-                                enable: true,
-                                speed: 5
-                            }
-                        },
-                        line_linked: {
-                            enable: true
-                        },
-                        move: {
-                            speed: 0.5
-                        }
-                    }    
-                }}    
-            />
         </div>
 			)
 	}

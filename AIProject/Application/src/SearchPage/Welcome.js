@@ -31,41 +31,7 @@ class Search extends  React.Component {
                     <p className="description">Take your regular searches and make them more targeted, helping you to find the results you need quickly.</p>
                     <Link to="/search"><Button  variant="primary" size="lg" href="/search">Start now ></Button> </Link>
                 </div>
-                <Particles className="particles_js"
-                params={{
-                    particles: {
-                        number: {
-                            value: 150,
-                            density: {
-                                value_area: 10000
-                            }
-                        },
-                        color: {
-                            value: '#fff'
-                        },
-                        opacity: {
-                            value: 0.8,
-                            anim: {
-                                enable: true
-                            }
-                        },
-                        size: {
-                            value: 7,
-                            random: true,
-                            anim: {
-                                enable: true,
-                                speed: 5
-                            }
-                        },
-                        line_linked: {
-                            enable: true
-                        },
-                        move: {
-                            speed: 0.5
-                        }
-                    }    
-                }}    
-            />
+
         </div>
 			)
 	}
